@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Population Pyramid Simulator</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; text-align: center; }
+    svg { background: #f4f4f4; margin-top: 1rem; }
+    button { margin-top: 1rem; padding: 0.5rem 1rem; font-size: 1rem; }
+    label, input, select { margin: 0.5rem; }
+    #stats { margin-top: 1.5rem; font-size: 1rem; }
+  </style>
+</head>
+<body>
+
+<h1>Population Pyramid Simulator</h1>
+
+<div>
+  <label for="scale">Display scale (1 bar = how many people?):</label>
+  <select id="scale">
+    <option value="100">1:100</option>
+    <option value="10000" selected>1:10,000</option>
+  </select>
+</div>
+
+<div>
+  <label for="tfr">Total Fertility Rate (children per woman):</label>
+  <input type="number" id="tfr" value="2.1" step="0.1" min="0" max="10">
+</div>
+
+<div>
+  <label for="sol">Standard of Living:</label>
+  <input type="number" id="sol" value="20" step="1" min="1" max="100">
+  <span id="solLabel"></span>
+</div>
+
+<div>
+  <label for="mortality">Mortality Curve:</label>
+  <select id="mortality">
+    <option value="modern" selected>Modern</option>
+    <option value="ancient">Ancient</option>
+    <option value="medieval">Medieval</option>
+    <option value="colonial">Colonial</option>
+  </select>
+</div>
+
+<div>
+  <label for="warLosses">War Losses (Males):</label>
+  <input type="number" id="warLosses" value="0" step="1000" min="0">
+
+  <label for="warStart">From age group:</label>
+  <select id="warStart"></select>
+
+  <label for="warEnd">To age group:</label>
+  <select id="warEnd"></select>
+</div>
+
+<button onclick="advanceDecade()">Advance 5 Years</button>
+
+<div>
+  <label for="yearSlider">View Year:</label>
+  <input type="range" id="yearSlider" min="0" max="0" value="0" step="5" style="width: 400px;">
+  <span id="yearDisplay">0</span>
+</div>
+
+<svg id="pyramid" width="800" height="840"></svg>
+
+<div id="stats"></div>
+
+<fieldset style="margin-top: 2rem; padding: 1rem; border: 1px solid #ccc;">
+  <legend>Disease Settings</legend>
+
+  <label>
+    <input type="checkbox" id="diseaseToggle">
+    Enable Disease
+  </label><br>
+
+  <label for="targetGender">Target Gender:</label>
+  <select id="targetGender">
+    <option value="both">Both</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select><br>
+
+  <label for="targetAges">Target Age Groups (comma-separated):</label>
+  <input type="text" id="targetAges" value="20,25,30"><br>
+
+  <label for="solThreshold">Affects SoL below:</label>
+  <input type="number" id="solThreshold" value="30"><br>
+
+  <label for="mortalityRate">Mortality Rate (0-1):</label>
+  <input type="number" id="mortalityRate" value="0.05" step="0.01" min="0" max="1"><br>
+
+  <label for="exposureRate">Exposure Rate (0-1):</label>
+  <input type="number" id="exposureRate" value="0.6" step="0.1" min="0" max="1"><br>
+
+  <label for="vaccinationRate">Vaccination Coverage (0-1):</label>
+  <input type="number" id="vaccinationRate" value="0" step="0.1" min="0" max="1">
+</fieldset>
+
+<script src="simulator.js"></script>
+<script src="disease.js"></script>
+<script src="analytics.js"></script>
+
+</body>
+</html>
